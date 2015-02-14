@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Go lang - new, small, pratical</title>
+
+		<meta name="author" content="Matej Baćo">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/obsidian.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>GO</h1>
+					<h3>small, practical language for new century</h3>
+					<p>
+						<small>Talk by <a href="http://twitter.com/matejbaco">Matej Baćo</a> from <a href="http://www.nivas.hr/">Nivas</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Talk breakdown</h2>
+					<ol>
+						<li>What is it</li>
+						<li>Why it's hot with examples</li>
+						<li>Where to start</li>
+						<li>Q&amp;A</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>What is it</h2>
+					<ol>
+						<li>open-source</li>
+						<li>compiled<br><small>super fast, cross compile out of the box</small></li>
+						<li>general-purpose<br><small>designed with systems programming in mind</small></li>
+						<li>statically typed<br><small>:= for implicit type</small></li>
+						<li>garbage-collected</li>
+						<li>memory safe</li>
+						<li>explicit support for concurrent programming</li>
+						<li>language is small</li>
+					</ol>
+					<p><small>The Go Programming Language Specification on <a href="http://golang.org/ref/spec">http://golang.org/ref/spec</a></small></p>
+				</section>
+
+				<section>
+					<h2>About</h2>
+					<p>Original creators <a href="http://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> (Unix, B etc.), <a href="http://en.wikipedia.org/wiki/Robert_Griesemer">Robert Griesemer</a> (V8 etc.) and <a href="http://en.wikipedia.org/wiki/Rob_Pike">Rob Pike</a> (Unix, UTF-8 etc.)</p>
+					<p>It borrows from Unix pipe mechanism and atomic programs (single purpose), is very fast, works great with UTF-8 and has excellent concurrency model.</p>
+					<h3>Less is more</h3>
+				</section>
+
+				<section>
+					<h2>Go is opinionated</h2>
+					<ul>
+						<li><span style="color:red;">no</span> type inheritance</li>
+						<li><span style="color:red;">no</span> method or operator overloading</li>
+						<li><span style="color:red;">no</span> pointer arithmetic</li>
+						<li><span style="color:red;">no</span> generic programming</li>
+						<li><span style="color:red;">no</span> list comprehensions</li>
+						<li><span style="color:red;">no</span> exceptions</li>
+						<li><span style="color:red;">no</span> default function parameters</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Go is opinionated</h2>
+					<ul>
+						<li><span style="color:lime;">yes</span> to type embedding where one type can contain others and pick up their methods</li>
+						<li><span style="color:lime;">yes</span> to type assertion</li>
+						<li><span style="color:lime;">yes</span> to interface{}, sort of a base type</li>
+						<li><span style="color:lime;">yes</span> to code generation</li>
+						<li><span style="color:lime;">yes</span> panic/recover</li>
+						<li><span style="color:lime;">yes</span> multiple return values</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2><span style="color: lime;">Opinionated</span> but not <span style="color: red;">dogmatic</span></h2>
+					<ul>
+						<li>Lots of OO elements: types have methods, local state, behavior, public/private access</li>
+						<li>Lots of functional elements: first class functions, higher-order functions, user-defined function types, function literals, closures</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Why it's hot</h2>
+					<p class="fragment">It has the MOST FEARSOME mascot in the world!</p>
+					<p class="fragment"><img height="260" data-src="gopher_1.png" alt="Gopher" style="border: none; background-color: #222;"></p>
+				</section>
+
+				<section>
+					<h3>Easy to pick-up</h3>
+					<pre><code data-trim>
+package main
+
+import (
+	"log"
+	"github.com/user/db"
+)
+
+func main() {
+	dbUser, dbPass := "root", "password"
+
+	dbConn, err := db.Open(dbUser, dbPass)
+	if err != nil {
+		log.Fatalf("DB connect failed with %v", err)
+	}
+	defer dbConn.Close()
+
+	// ...
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<p>Don't have db package from last slide?</p>
+					<p>Just type <span style="color: lime;">go get github.com/user/db</span> in command line</p>
+				</section>
+
+				<section>
+					<h2>Great tools!</h2>
+					<ul>
+						<li>go build [-race]</li>
+						<li>go get</li>
+						<li>go fmt</li>
+						<li>go test [-cover]</li>
+						<li>godoc</li>
+						<li>go generate</li>
+						<li>go tool pprof</li>
+						<li>list go's on ...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Pipes</h2>
+					<pre><code data-trim>
+// ...
+
+r, err := os.Open(path)
+if err != nil {
+	return err
+}
+defer r.Close()
+
+gzipR, err := gzip.NewReader(r)
+if err != nil {
+	return err
+}
+defer gzipR.Close()
+
+scanner := bufio.NewScanner(gzipR)
+success := scanner.Scan()
+if !success {
+	return errors.New("Error while scaning " + path)
+}
+firstLine := scanner.Text()
+
+// ...
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Pipes on a higher level</h2>
+					<pre><code data-trim>
+// ...
+
+staticHandler := static.NewHandler(ROOT_PATH)
+gzipStaticHandler := gzip.NewHandler(staticHandler)
+router.PathPrefix("/resources").Handler(gzipStaticHandler)
+
+// ...
+
+updateHandler := update.NewHandler(ROOT_PATH)
+updateAuthHandler := auth.NewAuthHandler(updateHandler)
+router.PathPrefix("/update").Methods("POST").Handler(updateAuthHandler)
+
+// ...
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>CONCURRENCY model</h2>
+					<p><strong style="color: lime;">Goroutines</strong>, non-blocking execution of concurrent functions multiplexed onto multiple OS threads, which synchronize and coordinate using special type called <strong style="color: lime;">channel</strong>.</p>
+				</section>
+
+				<section>
+					<h2>CONCURRENCY model</h2>
+					<ul>
+						<li>Based on communication</li>
+						<li>Easy to reason about</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Simple example</h3>
+					<pre><code data-trim>
+package main
+
+import "fmt"
+
+func main() {
+	idCh := make(chan int)
+
+	go func() {
+		id := 0
+		for {
+			idCh <- id
+			id = id + 1
+		}
+	}()
+
+	fmt.Println(<-idCh)
+	fmt.Println(<-idCh)
+	fmt.Println(<-idCh)
+}
+					</code></pre>
+					<p>Run it <a href="https://play.golang.org/p/w5MPNUVi-J">https://play.golang.org/p/w5MPNUVi-J</a></p>
+				</section>
+
+				<section>
+					<h3>Real world example</h3>
+					<pre><code data-trim>
+// ...
+
+type fileTask struct {
+  Path string
+  Node os.FileInfo
+  Err  error
+}
+
+var taskCh chan *fileTask
+var wg sync.WaitGroup
+
+func main() {
+  runtime.GOMAXPROCS(runtime.NumCPU())
+
+  // ...
+
+  taskCh = make(chan *fileTask)
+
+  for i := 0; i < 1000; i++ {
+    go worker(i, taskCh)
+  }
+
+  err := filepath.Walk(inputPath, visit)
+
+  // ...
+
+  wg.Wait()
+}
+
+func visit(path string, node os.FileInfo, err error) error {
+  task := &fileTask{
+    Path: path,
+    Node: node,
+    Err:  err}
+  
+  wg.Add(1)
+  taskCh <- task
+
+  return nil
+}
+
+func worker(workerId int, taskCh <-chan *fileTask) {
+  for {
+    task := <-taskCh
+
+    // ...
+
+    deleted, err := visitLogic(task.Path, task.Node)
+        
+    // error handling and logging ...
+
+    wg.Done()
+  }
+}
+// ...
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Implicit interfaces</h2>
+					<blockquote cite="https://golang.org/doc/effective_go.html">
+						&ldquo;Interfaces in Go provide a way to specify the behavior of an object: if something can do this, then it can be used here.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Famous interfaces of standard library</h2>
+					<pre><code data-trim>
+package io
+
+type Reader interface {
+        Read(p []byte) (n int, err error)
+}
+
+type Writer interface {
+        Write(p []byte) (n int, err error)
+}
+
+// -----
+
+package net/http
+
+type Handler interface {
+        ServeHTTP(ResponseWriter, *Request)
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Conclusion</h2>
+					<ul>
+						<li>it works for small and big</li>
+						<li>easy to learn</li>
+						<li>low maintenance</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Where to start</h2>
+					<ul>
+						<li>Start with <a href="http://tour.golang.org">tour.golang.org</a></li>
+						<li>Surf the <a href="https://golang.org/">golang.org</a></li>
+						<li>Read <a href="https://golang.org/doc/effective_go.html">Effective Go</a></li>
+						<li>Check out <a href="https://groups.google.com/forum/#!forum/golang-nuts">golang-nuts group</a></li>
+						<li>Subscribe to <a href="http://golangweekly.com/">golangweekly.com</a> newsletter</li>
+					</ul>					
+				</section>
+
+				<section>
+					<h2>Q&amp;A</h2>
+					<p>Please give feedback for this talk on<br><a href="https://joind.in/13601">joind.in/13601</a></p>				
+				</section>
+
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
