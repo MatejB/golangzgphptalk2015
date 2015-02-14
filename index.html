@@ -41,7 +41,7 @@
 			<div class="slides">
 				<section>
 					<h1>GO</h1>
-					<h3>small, practical language for new century</h3>
+					<h3>small, practical language for the new century</h3>
 					<p>
 						<small>Talk by <a href="http://twitter.com/matejbaco">Matej Baćo</a> from <a href="http://www.nivas.hr/">Nivas</a></small>
 					</p>
@@ -163,34 +163,6 @@ func main() {
 
 				<section>
 					<h2>Pipes</h2>
-					<pre><code data-trim>
-// ...
-
-r, err := os.Open(path)
-if err != nil {
-	return err
-}
-defer r.Close()
-
-gzipR, err := gzip.NewReader(r)
-if err != nil {
-	return err
-}
-defer gzipR.Close()
-
-scanner := bufio.NewScanner(gzipR)
-success := scanner.Scan()
-if !success {
-	return errors.New("Error while scaning " + path)
-}
-firstLine := scanner.Text()
-
-// ...
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Pipes on a higher level</h2>
 					<pre><code data-trim>
 // ...
 
