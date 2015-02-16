@@ -51,8 +51,17 @@
 					<h2>Talk breakdown</h2>
 					<ol>
 						<li>What is it</li>
-						<li>Why it's hot with examples</li>
+						<li>Why it's hot</li>
+						<li>
+							Code:
+							<ol style="list-style-type: lower-alpha;">
+								<li>Pipes</li>
+								<li>Concurrency</li>
+								<li>Interfaces</li>
+							</ol>
+						</li>
 						<li>Where to start</li>
+						<li>Conclusion</li>
 						<li>Q&amp;A</li>
 					</ol>
 				</section>
@@ -76,6 +85,11 @@
 					<h2>About</h2>
 					<p>Original creators <a href="http://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> (Unix, B etc.), <a href="http://en.wikipedia.org/wiki/Robert_Griesemer">Robert Griesemer</a> (V8 etc.) and <a href="http://en.wikipedia.org/wiki/Rob_Pike">Rob Pike</a> (Unix, UTF-8 etc.)</p>
 					<p>It borrows from Unix pipe mechanism and atomic programs (single purpose), is very fast, works great with UTF-8 and has excellent concurrency model.</p>
+				</section>
+
+				<section>
+					<h2>Go is opinionated</h2>
+					<p>it has preconceived ideas about what programming language should have or more importantly should not have in order to make programming easier and more practical</p>
 					<h3>Less is more</h3>
 				</section>
 
@@ -162,7 +176,8 @@ func main() {
 				</section>
 
 				<section>
-					<h2>Pipes</h2>
+					<h2>pipes</h2>
+					<p><small>as in Unix shell eq.</small><br><small style="color: lime; background-color: black;">find . -name ".log" | grep "DEBUG" | xargs rm</small></p>
 					<pre><code data-trim>
 // ...
 
@@ -177,6 +192,8 @@ updateAuthHandler := auth.NewAuthHandler(updateHandler)
 router.PathPrefix("/update").Methods("POST").Handler(updateAuthHandler)
 
 // ...
+
+http.ListenAndServe(":8080", nil)
 					</code></pre>
 				</section>
 
@@ -311,15 +328,6 @@ type Handler interface {
 				</section>
 
 				<section>
-					<h2>Conclusion</h2>
-					<ul>
-						<li>it works for small and big</li>
-						<li>easy to learn</li>
-						<li>low maintenance</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Where to start</h2>
 					<ul>
 						<li>Start with <a href="http://tour.golang.org">tour.golang.org</a></li>
@@ -331,8 +339,19 @@ type Handler interface {
 				</section>
 
 				<section>
+					<h2>Conclusion</h2>
+					<ul>
+						<li>exceptionally good at tackling some problems</li>
+						<li>it works for small (and big)</li>
+						<li>easy to learn</li>
+						<li>low maintenance</li>
+					</ul>
+				</section>
+
+				<section>
 					<h2>Q&amp;A</h2>
-					<p>Please give feedback for this talk on<br><a href="https://joind.in/13601">joind.in/13601</a></p>				
+					<p>Please give feedback for this talk on<br><a href="https://joind.in/13601">joind.in/13601</a></p>
+					<p>Slides will be on the same address.</p>		
 				</section>
 
 
