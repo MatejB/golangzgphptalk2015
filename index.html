@@ -305,7 +305,7 @@ func worker(workerId int, taskCh <-chan *fileTask) {
 				</section>
 
 				<section>
-					<h2>Famous interfaces of standard library</h2>
+					<h2>Interface usage example</h2>
 					<pre><code data-trim>
 package io
 
@@ -313,17 +313,18 @@ type Reader interface {
         Read(p []byte) (n int, err error)
 }
 
-type Writer interface {
-        Write(p []byte) (n int, err error)
-}
-
 // -----
 
-package net/http
+func deletable(r io.Reader) bool
+r, err := os.Open(pathToFile)
+del := deletable(r)
 
-type Handler interface {
-        ServeHTTP(ResponseWriter, *Request)
-}
+// ----
+
+func Open(name string) (file *File, err error)
+type File struct {}
+func (f *File) Read(b []byte) (n int, err error)
+
 					</code></pre>
 				</section>
 
